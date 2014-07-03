@@ -8,23 +8,28 @@ application MRBS.
 --------------
 
 *IMPORTANT:*
+
 La version hébergée sur ce dépôt est un fork non officiel de Grr que j'utilise
 pour publier certains développements effectués pour de clients, le projet
 officiel n'étant plus actif actuellement.
+
 J'accepte les pull-requests pertinentes et documentées, sans garantie sur le délai d'intégration, mais
 je ne répondrai pas sur les tickets.
+
 Si des contributeurs sont intéressés pour reprendre le projet, je suis tout à fait prêt
 à ouvrir les droits sur ce dépôt.
 
 --------------
 
 1. Installation
+
 2. License
+
 3. Remarques concernant la sécurité
 
 
 1. Installation
-=======================================
+---------------
 
 Pour obtenir une description complète de la procédure d'installation,
 veuillez vous reporter au fichier "INSTALL.txt".
@@ -37,7 +42,7 @@ serveur, et indiquez l'adresse où se trouvent les fichiers extraits dans un nav
 - disposer d'une base de données MySQL (adresse du serveur MySQL, login, mot de passe)
 
 2. Licence
-=======================================
+---------------
 
 GRR est publié sous les termes de la GNU General Public Licence, dont le
 contenu est disponible dans le fichier "license.txt", en anglais et dans le fichiers "licence_fr.html" en français.
@@ -52,7 +57,7 @@ ne pourront en aucun cas être tenus pour responsables d'éventuels bugs.
 
 
 3. Remarques concernant la sécurité
-=======================================
+---------------
 
 La sécurisation de GRR est dépendante de celle du serveur. Nous vous recommandons d'utiliser
 un serveur Apache sous Linux, en utilisant le protocole https (transferts de données cryptées), et en

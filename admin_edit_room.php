@@ -315,9 +315,10 @@ if ((!empty($room)) or (isset($area_id))) {
                     } else {
                         $tab = explode(".", $doc_file['name']);
                         $ext = strtolower($tab[1]);
-
-                        if (@file_exists($dest."img_".$room.".".$ext)) @unlink($dest."img_".$room.".".$ext);
-                        rename($dest.$doc_file['name'],$dest."img_".$room.".".$ext);
+                        if (($dest.$doc_file['name']!=$dest."img_".$room.".".$ext)) {
+                          if (@file_exists($dest."img_".$room.".".$ext)) @unlink($dest."img_".$room.".".$ext);
+                          rename($dest.$doc_file['name'],$dest."img_".$room.".".$ext);
+                        }
                         @chmod($dest."img_".$room.".".$ext, 0666);
                         $picture_room = "img_".$room.".".$ext;
                         $sql_picture = "UPDATE ".TABLE_PREFIX."_room SET picture_room='".protect_data_sql($picture_room)."' WHERE id=".$room;

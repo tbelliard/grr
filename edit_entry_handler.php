@@ -460,7 +460,7 @@ if (isset($id) and ($id!=0)) {
 if (!grr_sql_mutex_lock("".TABLE_PREFIX."_entry"))
     fatal_error(1, get_vocab('failed_to_acquire'));
 
-$date_now = mktime();
+$date_now = time();
 $error_booking_in_past = 'no';
 $error_booking_room_out = 'no';
 $error_duree_max_resa_area = 'no';
@@ -481,7 +481,7 @@ foreach ( $_GET['rooms'] as $room_id ) {
         while (($i < count($reps)) and ($error_booking_in_past == 'no') and ($error_duree_max_resa_area == 'no') and ($error_delais_max_resa_room == 'no') and ($error_delais_min_resa_room == 'no') and ($error_date_option_reservation=='no') and ($error_qui_peut_reserver_pour=='no') and ($error_heure_debut_fin=='no')) {
             if ((authGetUserLevel(getUserName(),-1) < 2) and (auth_visiteur(getUserName(),$room_id) == 0)) $error_booking_room_out = 'yes';
             if (!(verif_booking_date(getUserName(), -1, $room_id, $reps[$i], $date_now, $enable_periods))) $error_booking_in_past = 'yes';
-            if (!(verif_duree_max_resa_area(getUserName(), $room_id, $starttime, $endtime))) $error_duree_max_resa_aera = 'yes';
+            if (!(verif_duree_max_resa_area(getUserName(), $room_id, $starttime, $endtime))) $error_duree_max_resa_area = 'yes';
             if (!(verif_delais_max_resa_room(getUserName(), $room_id, $reps[$i]))) $error_delais_max_resa_room = 'yes';
             if (!(verif_delais_min_resa_room(getUserName(), $room_id, $reps[$i]))) $error_delais_min_resa_room = 'yes';
             if (!(verif_date_option_reservation($option_reservation, $reps[$i]))) $error_date_option_reservation = 'yes';

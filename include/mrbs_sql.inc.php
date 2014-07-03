@@ -175,7 +175,7 @@ function grrDelEntryInConflict($room_id, $starttime, $endtime, $ignore, $repigno
 function mrbsDelEntry($user, $id, $series, $all)
 {
     global $correct_diff_time_local_serveur, $enable_periods;
-    $date_now = mktime();
+    $date_now = time();
     $id_room = grr_sql_query1("select room_id FROM ".TABLE_PREFIX."_entry WHERE id='".$id."'");
     $repeat_id = grr_sql_query1("SELECT repeat_id FROM ".TABLE_PREFIX."_entry WHERE id='".$id."'");
     if ($repeat_id < 0)

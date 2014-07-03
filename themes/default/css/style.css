@@ -52,7 +52,7 @@ vertical-align:top
 td.cell_hours {
   background-color: #99CCFF;
   text-align: center;
-  font-size: 1em;
+  font-size: 1em;   
 }
 /* Vues week_all et toutes les vues mensuels :
    mise en forme des cellules lorsqu'il il a au moins une réservation */

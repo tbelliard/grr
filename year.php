@@ -112,7 +112,7 @@ $to_month = isset($_GET["to_month"]) ? $_GET["to_month"] : NULL;
 $to_year = isset($_GET["to_year"]) ? $_GET["to_year"] : NULL;
 
 $day = 1;
-$date_now = mktime();
+$date_now = time();
 # Default parameters:
 if (empty($debug_flag)) $debug_flag = 0;
 if (empty($from_month) || empty($from_year) || !checkdate($from_month, 1, $from_year))

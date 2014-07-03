@@ -211,7 +211,7 @@ function affiche_lien_contact($_cible,$_type_cible,$option_affichage) {
         var address = user+'@'+domain;
         var toWrite = '';
         if (debut > 0) {toWrite += '<'+'a href="mailto:';} else {toWrite +=';'};
-        toWrite +=address
+        toWrite +=address;
         document.write(toWrite);
     }
     function encode_fin_adresse(label) {
@@ -891,7 +891,7 @@ function print_header($day='',$month='',$year='',$area='',$type_session='with_se
 
    # If we dont know the right date then make it up
      if (!isset($day) or !isset($month) or !isset($year) or ($day == '') or ($month == '') or ($year == '')) {
-         $date_now = mktime();
+         $date_now = time();
          if ($date_now < getSettingValue("begin_bookings"))
              $date_ = getSettingValue("begin_bookings");
          else if ($date_now > getSettingValue("end_bookings"))
@@ -911,7 +911,7 @@ function print_header($day='',$month='',$year='',$area='',$type_session='with_se
 	{
 	if(document.pressed == 'a')
 	{
-  	document.getElementById('day').selectedIndex=<?php $date_now = mktime();echo (date("d",$date_now)-1); ?>;
+  	document.getElementById('day').selectedIndex=<?php $date_now = time();echo (date("d",$date_now)-1); ?>;
 		document.getElementById('month').selectedIndex=<?php echo (date("m",$date_now)-1);?>;
 		document.getElementById('year').selectedIndex=<?php echo (date("Y",$date_now)-strftime("%Y", getSettingValue("begin_bookings")));?>;
   	var p=location.pathname;
@@ -1085,7 +1085,8 @@ if (!(isset($desactive_bandeau_sup) and ($desactive_bandeau_sup==1) and ($type_s
       if (verif_access_search(getUserName())) {
           echo "<a href=\"report.php\">".get_vocab("report")."</a><br />";
       }
-      echo "<span class=\"small\">".affiche_version()."</span> - ";
+      if ((isset($_SESSION['statut']) and  ($_SESSION['statut'] == 'administrateur')))
+      echo "<span class=\"small\">".get_vocab("grr_version"). " ".affiche_version()."</span> - ";
       if ($type_session == "with_session") {
           if ($_SESSION['statut'] == 'administrateur') {
               echo affiche_lien_contact("contact_support","identifiant:non","seulement_si_email");
@@ -4224,7 +4225,7 @@ function affiche_nom_prenom_email($_beneficiaire,$_beneficiaire_ext,$type="nomai
             $person = $email[0];
             if (isset($email[1])) {
                 $domain = $email[1];
-                $chaine = "<script type=\"text/javascript\">encode_adresse('".$person."','".$domain."','".AddSlashes($tab_benef["nom"])."',1);</script>";
+                $chaine = "<script type=\"text/javascript\">encode_adresse('".$person."','".$domain."',1);encode_fin_adresse('".AddSlashes($tab_benef["nom"])."')</script>";
             } else {
                 $chaine = $tab_benef["nom"];
             }

@@ -110,7 +110,7 @@ else
 # Default parameters:
 if (empty($debug_flag)) $debug_flag = 0;
 
-$date_now = mktime();
+$date_now = time();
 # If we don't know the right date then use today:
 if (!isset($day) or !isset($month) or !isset($year))
 {

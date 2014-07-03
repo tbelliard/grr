@@ -515,7 +515,7 @@ for ($cday = 1; $cday <= $days_in_month; $cday++)
             }
         }
 		//  Possibilité de faire une nouvelle réservation
-		$date_now=mktime();
+		$date_now=time();
         $hour = date("H",$date_now); // Heure actuelle
         $date_booking = mktime(24, 0, 0, $month, $cday, $year); // minuit
     if ((($authGetUserLevel > 1) or  ($auth_visiteur == 1))

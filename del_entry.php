@@ -110,7 +110,7 @@ if($info = mrbsGetEntryInfo($id))
     }
     // On vérifie les dates
     $room_id = grr_sql_query1("SELECT ".TABLE_PREFIX."_entry.room_id FROM ".TABLE_PREFIX."_entry, ".TABLE_PREFIX."_room WHERE ".TABLE_PREFIX."_entry.room_id = ".TABLE_PREFIX."_room.id AND ".TABLE_PREFIX."_entry.id='".$id."'");
-    $date_now = mktime();
+    $date_now = time();
     get_planning_area_values($area); // Récupération des données concernant l'affichage du planning du domaine
     if ((!(verif_booking_date(getUserName(), $id, $room_id, -1, $date_now, $enable_periods))) or
     ((verif_booking_date(getUserName(), $id, $room_id, -1, $date_now, $enable_periods)) and ($can_delete_or_create!="y"))

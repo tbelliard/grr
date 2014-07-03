@@ -222,7 +222,7 @@ if (getSettingValue("webmaster_email") != "") {
 <br />
 
 <?php
-echo "<br /><p class=\"small\"><a href=\"".$grr_devel_url."\">".get_vocab("mrbs")."</a> - ".get_vocab("grr_version").affiche_version();
+echo "<br /><p class=\"small\"><a href=\"".$grr_devel_url."\">".get_vocab("mrbs")."</a>";
 $email = explode('@',$grr_devel_email);
 $person = $email[0];
 $domain = $email[1];

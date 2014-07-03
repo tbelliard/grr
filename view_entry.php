@@ -277,7 +277,7 @@ else
     exit();
 }
 
-$date_now = mktime();
+$date_now = time();
 
 $page = verif_page();
 

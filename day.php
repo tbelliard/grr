@@ -94,7 +94,7 @@ if (!loadSettings())
 #Fonction relative à la session
 require_once("./include/session.inc.php");
    #Si nous ne savons pas la date, nous devons la créer
-$date_now = mktime();
+$date_now = time();
 if (!isset($day) or !isset($month) or !isset($year))
 {
     if ($date_now < getSettingValue("begin_bookings"))

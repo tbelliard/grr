@@ -8,6 +8,7 @@ GRR-1.9.7
 
 Corrections de bugs et améliorations
 ------------------------------------
+- Amélioration relative à la sécurité : la version de GRR est affichée seulement pour les administrateurs
 - BUG : correction d'une faille de sécurité. La faille nécessitait d'avoir un compte avec les droits "Usager" (injection de code HTML et JavaScript sur les champs nom et prénom).
 - Dans admin_save_mysql.php remplacement de la fonction addslashes() par mysql_real_escape_string() pour éviter des erreurs lors de la restauration d'un fichier sql
 - BUG : correction d'un bug sur le "header information" dans report.php
@@ -39,7 +40,7 @@ Corrections de bugs et améliorations
 - BUG : La fonctionnalité permettant de rendre périodique une réservation ponctuelle provoque la suppression de toutes les réservations du domaine
 - Bug dans le calcul de la durée par défaut d'une réservation dans le formulaire de réservation.
 - SSO CAS : correction d'un bug lié à la fonction "phpCAS::getAttribute()" qui n'est pas implémentée dans "CAS/CAS.php".
-- BUG : un utilisateur ne pouvait être affecté en tant qu'administrateur à plusieurs domaine.
+- BUG : un utilisateur ne pouvait être affecté en tant qu'administrateur à plusieurs domaine.        
 
 - Possibilité de copier une réservation (merci à Jean-Charles Prin)
 - Possibilité, sous certaines conditions, de changer l'affectation d'une ressource à un domaine.
@@ -67,6 +68,9 @@ Corrections de bugs et améliorations
 - Bug dans l'envoi de mails automatiques : dans certains cas, un mail de confirmation était envoyé à un utilisateur modifiant sa propre réservation.
 - Bug dans le script edit_entry.php : le champ "brève description" n'était pas mis à jour quand on sélectionnait un utilisateur dans la liste déroulante "réservation au nom de" (cas où l'option "La rubrique brève description contient, par défaut, le nom de l'usager" est sélectionnée dans "Configuration générale"->"Contenu / Apparence")
 - Bug dans "Configuration générale"->"Contenu / Apparence" : il était impossible de choisir un logo portant le nom "logo.jpg", "logo.png" ou "logo.gif".
+- BUG : remplacement de mktime() par time() pour éviter l'erreur "Strict Standards: mktime() [function.mktime]: You should be using the time() function instead...
+- BUG lors de la modification de l'image d'une ressource: si on remplacait une image déjà présente par une image qui portait le même nom, une erreur se produisait.
+
 
 GRR-1.9.6
 ===================
@@ -120,7 +124,10 @@ Corrections de bugs et améliorations
 - Bug d'affichage sur le planning journée (day.php) dans le cas où toutes les ressources d'un domaine sont accessibles uniquement par des utilisateurs connectés.
 - Bug d'affichage sur le planning semaines toutes ressources (weel_all.php) dans le cas où une ressource est indisponible : cela n'était pas signalé comme tel.
 - Bug sur un test de validité sur l'identifiant dans session.inc.php
-
+- BUG dans function.inc.php : appel à la fonction javascript encode_adresse avec 4 paramètres au lieu de 3
+- BUG dans function.inc.php : après l'appel à la fonction javascript encode_adresse, il manque l'appel à la finction encode_fin_adresse
+- BUG dans function.inc.php : ; manquant dans function encode_adresse()
+- BUG dans edit_entry_handler.php : faute de frappe : $error_duree_max_resa_aera au lieu de $error_duree_max_resa_area
 
 Nouvelles fonctionnalités
 -------------------------

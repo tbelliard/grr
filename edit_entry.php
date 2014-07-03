@@ -748,7 +748,7 @@ if(((authGetUserLevel(getUserName(),-1,"room") >= $qui_peut_reserver_pour) or (a
         if ((!$cookie and strtolower($beneficiaire) == strtolower($row[0])) or ($cookie and $cookie==$row[0]))  {
             echo " selected=\"selected\" ";
         }
-        echo ">$row[1] $row[2]</option>";
+        echo ">".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])."</option>";
 
     }
     // Si le bénéficiaire actuellement enregistré n'est plus dans la base,
@@ -779,7 +779,7 @@ if(((authGetUserLevel(getUserName(),-1,"room") >= $qui_peut_reserver_pour) or (a
 echo "<tr><td class=\"E\"><b>$B</b></td></tr>
 <tr><td class=\"CL\"><input id=\"name\" name=\"name\" size=\"80\" value=\"$C\" /></td></tr>
 <tr><td class=\"E\"><b>$D</b></td></tr>
-<tr><td class=\"TL\"><textarea name=\"description\" rows=\"2\" cols=\"80\">$E</textarea></td></tr>";
+<tr><td class=\"TL\"><textarea name=\"description\" rows=\"5\" cols=\"80\">$E</textarea></td></tr>";
 echo "<tr><td><div id=\"div_champs_add\">";
 // Ici, on insère tous ce qui concerne les champs additionnels avec de l'ajax !
 echo "</div>";

@@ -746,7 +746,7 @@ function verif_page() {
 
 function page_accueil($param='no') {
    // Definition de $defaultroom
-   if (isset($_SESSION['default_room']) and ($_SESSION['default_room'] >0)) {
+   if (isset($_SESSION['default_room'])) {
       $defaultroom = $_SESSION['default_room'];
    } else {
       $defaultroom = getSettingValue("default_room");

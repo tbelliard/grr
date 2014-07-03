@@ -84,6 +84,7 @@ $id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"
 $change_area = isset($_POST["change_area"]) ? $_POST["change_area"] : NULL;
 $area_name = isset($_POST["area_name"]) ? $_POST["area_name"] : NULL;
 $access = isset($_POST["access"]) ? $_POST["access"] : NULL;
+$filter_empty_resources = isset($_POST["filter_empty_resources"]) ? $_POST["filter_empty_resources"] : NULL;
 $ip_adr = isset($_POST["ip_adr"]) ? $_POST["ip_adr"] : NULL;
 $room_name = isset($_POST["room_name"]) ? $_POST["room_name"] : NULL;
 $description = isset($_POST["description"]) ? $_POST["description"] : NULL;
@@ -668,7 +669,7 @@ if ((!empty($id_area)) or (isset($add_area)))
       unset($change_done);
     } else {
       // Un site a été affecté, on peut continuer
-      // la valeur par défaut ne peut être infériure au plus petit bloc réservable
+      // la valeur par défaut ne peut être inférieure au plus petit bloc réservable
       if ($_POST['duree_par_defaut_reservation_area'] < $_POST['resolution_area']) $_POST['duree_par_defaut_reservation_area'] = $_POST['resolution_area'];
         // la valeur par défaut doit être un multiple du plus petit bloc réservable
         $_POST['duree_par_defaut_reservation_area']= intval($_POST['duree_par_defaut_reservation_area']/$_POST['resolution_area'])*$_POST['resolution_area'];
@@ -715,6 +716,7 @@ if ((!empty($id_area)) or (isset($add_area)))
         }
         $sql = "UPDATE ".TABLE_PREFIX."_area SET
         area_name='".protect_data_sql($area_name)."',
+        filter_empty_resources='".protect_data_sql($filter_empty_resources)."',
         access='".protect_data_sql($access)."',
         order_display='".protect_data_sql($area_order)."',
         ip_adr='".protect_data_sql($ip_adr)."',
@@ -738,6 +740,7 @@ if ((!empty($id_area)) or (isset($add_area)))
       } else {
         $sql = "INSERT INTO ".TABLE_PREFIX."_area SET
         area_name='".protect_data_sql($area_name)."',
+        filter_empty_resources='".protect_data_sql($filter_empty_resources)."',
         access='".protect_data_sql($access)."',
         order_display='".protect_data_sql($area_order)."',
         ip_adr='".protect_data_sql($ip_adr)."',
@@ -889,6 +892,7 @@ if ((!empty($id_area)) or (isset($add_area)))
     {
         $row["id"] = '';
         $row["area_name"] = '';
+        $row["filter_empty_resources"] = '';
         $row["order_display"]  = '';
         $row["access"] = '';
         $row["ip_adr"] = '';
@@ -930,6 +934,14 @@ if ((!empty($id_area)) or (isset($add_area)))
     if ($row["access"] == 'r') echo "checked=\"checked\"";
     echo " /></td>\n";
     echo "</tr>";
+    echo "</tr><tr>\n";
+    // Est-ce qu'on masque les resources sans réservations ?
+    echo "<td>".get_vocab("filter_empty_resources").get_vocab("deux_points")."</td>\n";
+    echo "<td><input type=\"checkbox\" value=\"1\" name=\"filter_empty_resources\"";
+    if ($row["filter_empty_resources"] == '1') echo "checked=\"checked\"";
+    echo " /></td>\n";
+    echo "</tr>";
+
 
     // Site
     if (getSettingValue("module_multisite") == "Oui") {

@@ -735,6 +735,24 @@ if (isset($_POST['maj']) or isset($_GET['force_maj'])) {
     }
 
 
+    if ($version_old < "1.9.8.0") {
+      $result .= "<b>Mise à jour jusqu'à la version 1.9.8 :</b><br />";
+
+      $result_inter .= traite_requete("ALTER TABLE ".TABLE_PREFIX."_area ADD filter_empty_resources CHAR( 1 ) DEFAULT '0' NOT NULL ;");
+
+      if ($result_inter == '')
+      {
+      $result .= "<span style=\"color:green;\">Ok !</span><br />";
+      }
+      else
+      {
+      $result .= $result_inter;
+      }
+      $result_inter = '';
+    }
+
+
+
     // Vérification du format des champs additionnels
     // Avant version 1.9.4, les champs add étaient stockés sous la forme <id_champ>champ_encode_en_base_64</id_champ>
     // A partir de la version 1.9.4, les champs add. sont stockés sous la forme @id_champ@url_encode(champ)@/id_champ@

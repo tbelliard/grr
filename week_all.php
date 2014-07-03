@@ -249,6 +249,15 @@ if ($_GET['pview'] != 1) {
     } else {
         $area_list_format = getSettingValue("area_list_format");
     }
+    
+    if ($area) {
+      $sql = "select filter_empty_resources from ".TABLE_PREFIX."_area where id='".protect_data_sql($area)."'";
+      $row = grr_sql_row(grr_sql_query($sql), 0);
+      $hide_empty_resources = $row[0] == 1 ? true : false;
+    } else {
+      $hide_empty_resources = false;
+    }
+    
     # Sélection des sites, domaines et ressources
     if ($area_list_format != "list") {
         # Sélection sous la forme de listes déroulantes
@@ -264,7 +273,12 @@ if ($_GET['pview'] != 1) {
         echo "</td><td>";
         echo make_area_list_html('week_all.php',$id_site, $area, $year, $month, $day, getUserName()); # from functions.inc.php
         echo "</td>\n<td>\n";
-        make_room_list_html('week.php', $area, $room, $year, $month, $day);
+        // Faut-il forcer le mode liste déroulante pour le domaine sélectionné ?
+        if ($hide_empty_resources) {
+          echo make_room_select_html('week', $area, $room, $year, $month, $day);
+        } else {
+          make_room_list_html('week.php', $area, $room, $year, $month, $day);
+        }
         echo "</td>\n\n";
     }
 
@@ -286,8 +300,13 @@ switch ($dateformat) {
     break;
 }
 
- echo "<div class=\"titre_planning\">".get_vocab("week").get_vocab("deux_points").utf8_strftime($dformat, $date_start)." - ". utf8_strftime($dformat, $date_end)
-  . "<br /> $this_area_name - ".get_vocab("all_rooms")."</div>\n";
+echo "<div class=\"titre_planning\">".get_vocab("week").get_vocab("deux_points").utf8_strftime($dformat, $date_start)." - ". utf8_strftime($dformat, $date_end) . "<br /> $this_area_name - ";
+if ($hide_empty_resources) {
+  echo get_vocab("all_rooms_with_reservations");
+} else {
+  echo get_vocab("all_rooms");
+}
+echo "</div>\n";
 
 #y? are year, month and day of the previous week.
 #t? are year, month and day of the next week.
@@ -341,6 +360,10 @@ $sql = "SELECT start_time, end_time, ".TABLE_PREFIX."_entry.id, name, beneficiai
 #  d[monthday]["id"][] = ID of each entry, for linking.
 #  d[monthday]["data"][] = "start-stop" times of each entry.
 
+// On stocke également dans un tableau séparé la liste des ressources
+// qui ont au moins une réservation
+$r = array();
+
 $res = grr_sql_query($sql);
 if (! $res) echo grr_sql_error();
 else for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
@@ -377,6 +400,7 @@ else for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
            $d[$day_num]["who"][] = "";
         $d[$day_num]["who1"][] = affichage_lien_resa_planning($row[3],$row[2]);
         $d[$day_num]["id_room"][]=$row[5] ;
+        $r[$row[5]] = true; // On stock l'ID de la ressources, pour indiquer qu'au moins une réservation est présente
         $d[$day_num]["color"][]=$row[6];
         $d[$day_num]["res"][] = $row[7];
         $d[$day_num]["description"][] = affichage_resa_planning($row[8],$row[2]);;
@@ -577,7 +601,7 @@ if (grr_sql_count($res) == 0)
   {
    // calcul de l'accès à la ressource en fonction du niveau de l'utilisateur
    $verif_acces_ressource = verif_acces_ressource(getUserName(), $row[2]);
-   if ($verif_acces_ressource) {  // on n'affiche pas toutes les ressources
+   if ($verif_acces_ressource and (!$hide_empty_resources || $r[$row[2]])) {  // on n'affiche pas toutes les ressources
     // Calcul du niveau d'accès aux fiche de réservation détaillées des ressources
     $acces_fiche_reservation = verif_acces_fiche_reservation(getUserName(), $row[2]);
     // calcul du test si l'utilisateur a la possibilité d'effectuer une réservation, compte tenu

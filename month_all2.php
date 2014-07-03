@@ -184,6 +184,15 @@ if ($enable_periods=='y') {
 $this_area_name = "";
 $this_room_name = "";
 
+if ($area) {
+  $sql = "select filter_empty_resources from ".TABLE_PREFIX."_area where id='".protect_data_sql($area)."'";
+  $row = grr_sql_row(grr_sql_query($sql), 0);
+  $hide_empty_resources = $row[0] == 1 ? true : false;
+} else {
+  $hide_empty_resources = false;
+}
+
+
 // Si format imprimable ($_GET['pview'] = 1), on n'affiche pas cette partie
 if ($_GET['pview'] != 1) {
     #Table avec areas, rooms, minicals.
@@ -210,7 +219,12 @@ if ($_GET['pview'] != 1) {
         echo "</td><td>";
         echo make_area_list_html('month_all2.php',$id_site, $area, $year, $month, $day, getUserName());
         echo "</td>\n<td>\n";
-        make_room_list_html('month.php', $area, $room, $year, $month, $day);
+        // Faut-il forcer le mode liste déroulante pour le domaine sélectionné ?
+        if ($hide_empty_resources) {
+          echo make_room_select_html('month',$area, $room, $year, $month, $day);
+        } else {
+            make_room_list_html('month.php', $area, $room, $year, $month, $day);
+        }
         echo "</td>\n\n";
     }
 
@@ -265,9 +279,11 @@ $all_day = preg_replace("/ /", "&nbsp;", get_vocab("all_day"));
 # row[6] = statut
 # row[7] = Description complète
 
+# row[12] = ID de la ressource
 
 
-$sql = "SELECT start_time, end_time,".TABLE_PREFIX."_entry.id, name, beneficiaire, room_name, statut_entry, ".TABLE_PREFIX."_entry.description, ".TABLE_PREFIX."_entry.option_reservation, ".TABLE_PREFIX."_room.delais_option_reservation, type, ".TABLE_PREFIX."_entry.moderate
+
+$sql = "SELECT start_time, end_time,".TABLE_PREFIX."_entry.id, name, beneficiaire, room_name, statut_entry, ".TABLE_PREFIX."_entry.description, ".TABLE_PREFIX."_entry.option_reservation, ".TABLE_PREFIX."_room.delais_option_reservation, type, ".TABLE_PREFIX."_entry.moderate, ".TABLE_PREFIX."_entry.room_id
    FROM ".TABLE_PREFIX."_entry inner join ".TABLE_PREFIX."_room on ".TABLE_PREFIX."_entry.room_id=".TABLE_PREFIX."_room.id
    WHERE (start_time <= $month_end AND end_time > $month_start and area_id='".$area."')
    ORDER by start_time, end_time, ".TABLE_PREFIX."_room.room_name";
@@ -276,6 +292,10 @@ $sql = "SELECT start_time, end_time,".TABLE_PREFIX."_entry.id, name, beneficiair
 # The information is stored as:
 #  d[monthday]["id"][] = ID of each entry, for linking.
 #  d[monthday]["data"][] = "start-stop" times of each entry.
+
+// On stocke également dans un tableau séparé la liste des ressources
+// qui ont au moins une réservation
+$r = array();
 
 $res = grr_sql_query($sql);
 if (! $res) echo grr_sql_error();
@@ -317,6 +337,7 @@ for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
         if ($temp != "") $temp = " - ".$temp;
         $d[$day_num]["who1"][] = affichage_lien_resa_planning($row[3],$row[2]);
         $d[$day_num]["room"][]=$row[5] ;
+        $r[$row[12]] = true; // On stock l'ID de la ressources, pour indiquer qu'au moins une réservation est présente
         $d[$day_num]["res"][] = $row[6];
         $d[$day_num]["color"][] = $row[10];
         if ($row[9] > 0)
@@ -475,7 +496,7 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
 {
    // calcul de l'accès à la ressource en fonction du niveau de l'utilisateur
    $verif_acces_ressource = verif_acces_ressource(getUserName(), $row[2]);
-   if ($verif_acces_ressource) {  // on n'affiche pas toutes les ressources
+   if ($verif_acces_ressource and (!$hide_empty_resources || $r[$row[2]])) {  // on n'affiche pas toutes les ressources
 
     // Calcul du niveau d'accès aux fiche de réservation détaillées des ressources
     $acces_fiche_reservation = verif_acces_fiche_reservation(getUserName(), $row[2]);

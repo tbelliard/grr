@@ -209,7 +209,19 @@ if ($_GET['pview'] != 1) {
         echo "</td><td>";
         echo make_area_list_html('month_all.php',$id_site, $area, $year, $month, $day, getUserName());
         echo "</td>\n<td>\n";
-        make_room_list_html('month.php', $area, $room, $year, $month, $day);
+        
+        // Faut-il forcer le mode liste déroulante pour le domaine sélectionné ?
+        if ($area) {
+          $sql = "select filter_empty_resources from ".TABLE_PREFIX."_area where id='".protect_data_sql($area)."'";
+          $row = grr_sql_row(grr_sql_query($sql), 0);
+          if ($row[0] == 1) {
+            echo make_room_select_html('month',$area, $room, $year, $month, $day);
+          } else {
+            make_room_list_html('month.php', $area, $room, $year, $month, $day);
+          }
+        } else {
+          make_room_list_html('month.php', $area, $room, $year, $month, $day);
+        }
         echo "</td>\n\n";
     }
 

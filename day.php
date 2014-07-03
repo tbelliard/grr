@@ -211,6 +211,15 @@ if (isset($_SESSION['default_list_type']) or (getSettingValue("authentification_
     $area_list_format = getSettingValue("area_list_format");
 }
 
+if ($area) {
+  $sql = "select filter_empty_resources from ".TABLE_PREFIX."_area where id='".protect_data_sql($area)."'";
+  $row = grr_sql_row(grr_sql_query($sql), 0);
+  $hide_empty_resources = $row[0] == 1 ? true : false;
+} else {
+  $hide_empty_resources = false;
+}
+
+
 # Sélection des sites, domaines et ressources
 if ($area_list_format != "list") {
   # Sélection sous la forme de listes déroulantes
@@ -226,7 +235,12 @@ if ($area_list_format != "list") {
 	echo "</td><td>";
   echo make_area_list_html('day.php',$id_site,$area,$year,$month,$day,getUserName());
 	echo "</td><td>";
-	make_room_list_html('week.php',$area,"",$year,$month,$day);
+  // Faut-il forcer le mode liste déroulante pour le domaine sélectionné ?
+  if ($hide_empty_resources) {
+    echo make_room_select_html('week',$area,"",$year,$month,$day);
+  } else {
+    make_room_list_html('week.php',$area,"",$year,$month,$day);
+  }
 	echo "</td>";
 }
 
@@ -299,6 +313,8 @@ $sql = "SELECT ".TABLE_PREFIX."_room.id, start_time, end_time, name, ".TABLE_PRE
    WHERE ".TABLE_PREFIX."_entry.room_id = ".TABLE_PREFIX."_room.id
    AND area_id = '".protect_data_sql($area)."'
    AND start_time < ".($pm7+$resolution)." AND end_time > $am7 ORDER BY start_time";
+
+
 
 $res = grr_sql_query($sql);
 if (! $res) {
@@ -412,7 +428,7 @@ else
       $id_room[$i] =  $row[2];
       $nbcol++;
         // On affiche pas toutes les ressources
-        if (verif_acces_ressource(getUserName(), $id_room[$i])) {
+        if (verif_acces_ressource(getUserName(), $id_room[$i]) and (!$hide_empty_resources || $today[$id_room[$i]])) {
         $room_name[$i] = $row[0];
 
         $statut_room[$id_room[$i]] =  $row[4];
@@ -464,11 +480,19 @@ else
         $delais_option_reservation[$row[2]] = $row[6];
         }
     }
-    if (count($rooms)==0) {
+    // On arrête si on n'a pas les droits d'accès
+    if (count($rooms)==0 and !$hide_empty_resources) {
         echo "<br /><h1>".get_vocab("droits_insuffisants_pour_voir_ressources")."</h1><br />";
         include "include/trailer.inc.php";
         exit;
+        
+    // Idem si on n'affiche pas les ressources sans réservations
+    } else if (count($rooms)==0 and $hide_empty_resources) {
+        echo "<br /><h1>".get_vocab("nothing_found")."</h1><br />";
+        include "include/trailer.inc.php";
+        exit;
     }
+  
     echo "<th  style=\"width:5%;\">&nbsp;</th></tr>\n";
     $tab[1][] = "&nbsp;";
 
@@ -489,7 +513,7 @@ else
     for ($i = 0; $i < $nbcol; $i++)
     {
       // On affiche pas toutes les ressources
-      if (verif_acces_ressource(getUserName(), $id_room[$i])) {
+      if (verif_acces_ressource(getUserName(), $id_room[$i]) and (!$hide_empty_resources || $today[$id_room[$i]])) {
         // Si la ressource est temporairement indisponible, on le signale, sinon, couleur normale
         if ($statut_room[$id_room[$i]] == "0") tdcell("avertissement"); else tdcell("cell_hours");
         if ($_GET['pview'] != 1)
@@ -677,7 +701,7 @@ else
     for ($i = 0; $i < $nbcol; $i++)
     {
         // On affiche pas toutes les ressources
-        if (verif_acces_ressource(getUserName(), $id_room[$i])) {
+        if (verif_acces_ressource(getUserName(), $id_room[$i]) and (!$hide_empty_resources || $today[$id_room[$i]])) {
           echo "<th";
           if ($statut_room[$id_room[$i]] == "0") echo " class='avertissement' ";
           echo ">" . htmlspecialchars($room_name[$i])."</th>";

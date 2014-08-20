@@ -152,7 +152,7 @@ $delais_option_reservation  = grr_sql_query1("select delais_option_reservation f
 $qui_peut_reserver_pour  = grr_sql_query1("select qui_peut_reserver_pour from ".TABLE_PREFIX."_room where id='".$room."'");
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars( $_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters( $_SERVER['HTTP_REFERER']);
 
 $longueur_liste_ressources_max = getSettingValue("longueur_liste_ressources_max");
 if ($longueur_liste_ressources_max == '') $longueur_liste_ressources_max = 20;
@@ -643,9 +643,9 @@ if (getSettingValue("remplissage_description_breve")=='1') {
    $affiche_mess_asterisque=true;
 }
 $B .= get_vocab("deux_points");
-$C = htmlspecialchars($breve_description);
+$C = my_htmlspecialcharacters($breve_description);
 $D = get_vocab("fulldescription");
-$E = htmlspecialchars ( $description );
+$E = my_htmlspecialcharacters ( $description );
 $F = get_vocab("date").get_vocab("deux_points");
 $G = genDateSelectorForm("start_", $start_day, $start_month, $start_year,"");
 
@@ -748,7 +748,7 @@ if(((authGetUserLevel(getUserName(),-1,"room") >= $qui_peut_reserver_pour) or (a
         if ((!$cookie and strtolower($beneficiaire) == strtolower($row[0])) or ($cookie and $cookie==$row[0]))  {
             echo " selected=\"selected\" ";
         }
-        echo ">".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])."</option>";
+        echo ">".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])."</option>";
 
     }
     // Si le bénéficiaire actuellement enregistré n'est plus dans la base,
@@ -769,10 +769,10 @@ if(((authGetUserLevel(getUserName(),-1,"room") >= $qui_peut_reserver_pour) or (a
         echo "<tr id=\"menu4\"><td>";
     else
         echo "<tr style=\"display:none\" id=\"menu4\"><td>";
-    echo get_vocab("nom beneficiaire")." *".get_vocab("deux_points")."<input type=\"text\" name=\"benef_ext_nom\" value=\"".htmlspecialchars($tab_benef["nom"])."\" size=\"20\" />";
+    echo get_vocab("nom beneficiaire")." *".get_vocab("deux_points")."<input type=\"text\" name=\"benef_ext_nom\" value=\"".my_htmlspecialcharacters($tab_benef["nom"])."\" size=\"20\" />";
     $affiche_mess_asterisque=true;
     if (getSettingValue("automatic_mail") == 'yes') {
-        echo "<br />".get_vocab("email beneficiaire").get_vocab("deux_points")."<input type=\"text\" name=\"benef_ext_email\" value=\"".htmlspecialchars($tab_benef["email"])."\" size=\"20\" />";
+        echo "<br />".get_vocab("email beneficiaire").get_vocab("deux_points")."<input type=\"text\" name=\"benef_ext_email\" value=\"".my_htmlspecialcharacters($tab_benef["email"])."\" size=\"20\" />";
     }
     echo "</td></tr>\n";
 } else     $flag_qui_peut_reserver_pour = "no";

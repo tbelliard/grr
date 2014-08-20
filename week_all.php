@@ -147,7 +147,7 @@ if ((getSettingValue("authentification_obli")==0) and (getUserName()=='')) {
     $type_session = "with_session";
 }
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 // Construction des identifiants de la ressource $room, du domaine $area, du site $id_site
 Definition_ressource_domaine_site();
@@ -587,7 +587,7 @@ if (grr_sql_count($res) == 0)
                 $t -=3600;
         }
         if ($display_day[$num_week_day] == 1) // on n'affiche pas tous les jours de la semaine
-            echo tdcell("cell_hours", 12.5)."<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\" href='day.php?year=".$temp_year."&amp;month=".$temp_month."&amp;day=".$num_day."&amp;area=".$area."'>" . get_vocab("allday")."</a></td>\n";
+            echo tdcell("cell_hours", 12.5)."<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\" href='day.php?year=".$temp_year."&amp;month=".$temp_month."&amp;day=".$num_day."&amp;area=".$area."'>" . get_vocab("allday")."</a></td>\n";
         $num_week_day++;// Pour le calcul des jours à afficher
         $num_week_day = $num_week_day % 7;// Pour le calcul des jours à afficher
       }
@@ -615,7 +615,7 @@ if (grr_sql_count($res) == 0)
 
     // Affichage de la première colonne (nom des ressources)
     echo "<tr>\n";
-    echo tdcell("cell_hours")."<a title=\"".htmlspecialchars(get_vocab("see_week_for_this_room"))."\" href='week.php?year=".$year."&amp;month=".$month."&amp;day=".$day."&amp;area=".$area."&amp;room=".$row[2]."'>" . htmlspecialchars($row[0]) ."</a><br />\n";
+    echo tdcell("cell_hours")."<a title=\"".my_htmlspecialcharacters(get_vocab("see_week_for_this_room"))."\" href='week.php?year=".$year."&amp;month=".$month."&amp;day=".$day."&amp;area=".$area."&amp;room=".$row[2]."'>" . my_htmlspecialcharacters($row[0]) ."</a><br />\n";
     if ($row[4]=="0") echo "<span class=\"texte_ress_tempo_indispo\">".get_vocab("ressource_temporairement_indisponible")."</span><br />"; // Ressource temporairement indisponible
     if (verif_display_fiche_ressource(getUserName(), $row[2]) and $_GET['pview'] != 1)
         echo "<a href='javascript:centrerpopup(\"view_room.php?id_room=$row[2]\",600,480,\"scrollbars=yes,statusbar=no,resizable=yes\")' title=\"".get_vocab("fiche_ressource")."\">
@@ -683,7 +683,7 @@ if (grr_sql_count($res) == 0)
                     echo "<span class=\"small_planning\"><b>". $d[$cday]["data"][$i]
                     . "</b><br />";
                     if ($acces_fiche_reservation)
-                        echo "<a title=\"".htmlspecialchars($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]."&amp;page=week_all&amp;day=$cday&amp;month=$cmonth&amp;year=$cyear&amp;\">"
+                        echo "<a title=\"".my_htmlspecialcharacters($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]."&amp;page=week_all&amp;day=$cday&amp;month=$cmonth&amp;year=$cyear&amp;\">"
                        . $d[$cday]["who1"][$i]
                        . "</a>";
                     else

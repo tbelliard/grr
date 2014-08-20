@@ -41,7 +41,7 @@ $msg='';
 
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");
@@ -138,7 +138,7 @@ $out_html .= "\n<option value=\"admin_access_area.php?id_area=-1\">".get_vocab('
         $link = "admin_access_area.php?id_area=$row[0]";
         // on affiche que les domaines que l'utilisateur connecté a le droit d'administrer
         if(authGetUserLevel(getUserName(),$row[0],'area') >= 4) {
-            $out_html .= "\n<option $selected value=\"$link\">" . htmlspecialchars($row[1])."</option>";
+            $out_html .= "\n<option $selected value=\"$link\">" . my_htmlspecialcharacters($row[1])."</option>";
             $existe_domaine = 'yes';
         }
     }
@@ -174,8 +174,8 @@ if ($id_area != -1) {
     if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
         {
         $login_user = $row[0];
-        $nom_admin = htmlspecialchars($row[1]);
-        $prenom_admin = htmlspecialchars($row[2]);
+        $nom_admin = my_htmlspecialcharacters($row[1]);
+        $prenom_admin = my_htmlspecialcharacters($row[2]);
         echo "<b>";
         echo "$nom_admin $prenom_admin</b> | <a href='admin_access_area.php?action=del_user&amp;login_user=".urlencode($login_user)."&amp;id_area=$id_area'>".get_vocab("delete")."</a><br />\n";
     }
@@ -198,7 +198,7 @@ if ($id_area != -1) {
 
     $res = grr_sql_query($sql);
     if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
-        echo "<option value=\"$row[0]\">".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])." </option>\n";
+        echo "<option value=\"$row[0]\">".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])." </option>\n";
     }
     ?>
     </select>
@@ -228,7 +228,7 @@ if ($id_area != -1) {
 
     <?php
     if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
-        echo "<option value=\"$row[0]\">".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])." </option>\n";
+        echo "<option value=\"$row[0]\">".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])." </option>\n";
     }
     ?>
 

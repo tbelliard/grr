@@ -52,7 +52,7 @@ $id_area = isset($_POST["id_area"]) ? $_POST["id_area"] : (isset($_GET["id_area"
 if (!isset($id_area)) settype($id_area,"integer");
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if(authGetUserLevel(getUserName(),-1) < 6)
 {
     $day   = date("d");
@@ -132,7 +132,7 @@ if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
 {
     $selected = ($row[0] == $id_area) ? "selected=\"selected\"" : "";
     $link = "admin_right_admin.php?id_area=$row[0]";
-    $out_html .= "<option $selected value=\"$link\">" . htmlspecialchars($row[1])."</option>\n";
+    $out_html .= "<option $selected value=\"$link\">" . my_htmlspecialcharacters($row[1])."</option>\n";
 }
 $out_html .= "</select>
 <script type=\"text/javascript\" >
@@ -187,7 +187,7 @@ if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
             $exist_admin='yes';
         }
         echo "<b>";
-        echo htmlspecialchars($row[1])." ".htmlspecialchars($row[2])."</b> | <a href='admin_right_admin.php?action=del_admin&amp;login_admin=".urlencode($row[0])."&amp;id_area=$id_area'>".get_vocab("delete")."</a><br />";
+        echo my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])."</b> | <a href='admin_right_admin.php?action=del_admin&amp;login_admin=".urlencode($row[0])."&amp;id_area=$id_area'>".get_vocab("delete")."</a><br />";
     }
 }
 if ($exist_admin=='no') {
@@ -208,7 +208,7 @@ AND (".TABLE_PREFIX."_j_useradmin_area.login is null or (".TABLE_PREFIX."_j_user
 $res = grr_sql_query($sql);
 if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
     if (authUserAccesArea($row[0],$id_area) == 1) {
-        echo "<option value='$row[0]'>".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])."</option>";
+        echo "<option value='$row[0]'>".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])."</option>";
     }
 }
 ?>
@@ -239,7 +239,7 @@ AND (".TABLE_PREFIX."_j_useradmin_area.login is null or (".TABLE_PREFIX."_j_user
     <?php
 	if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
 		if (authUserAccesArea($row[0],$id_area) == 1) {
-        echo "<option value='$row[0]'>".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])."</option>";
+        echo "<option value='$row[0]'>".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])."</option>";
 		}
 	}
     ?>

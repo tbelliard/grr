@@ -158,7 +158,7 @@ if ((getSettingValue("authentification_obli")==0) and (getUserName()=='')) {
 }
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 if (check_begin_end_bookings($day, $from_month, $from_year))
 {
@@ -256,7 +256,7 @@ if ($_GET['pview'] != 1) {
 
     echo "</form></td>\n";
 
-	echo '<td><a title="'.htmlspecialchars(get_vocab('back')).'" href="'.page_accueil('no').'">'.$vocab['back'].'</a></td>';
+	echo '<td><a title="'.my_htmlspecialcharacters(get_vocab('back')).'" href="'.page_accueil('no').'">'.$vocab['back'].'</a></td>';
 
     echo "</tr></table>\n";
 }
@@ -452,7 +452,7 @@ for ($k = 0; $k<$days_in_month; $k++) {
     // On inscrit le numéro du mois dans la deuxième ligne
     if ($display_day[$cweek]==1) {
         echo tdcell("cell_hours");
-        echo "<div><a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year_num&amp;month=$month_num&amp;day=$cday&amp;area=$area\">$name_day</a>";
+        echo "<div><a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year_num&amp;month=$month_num&amp;day=$cday&amp;area=$area\">$name_day</a>";
         if (getSettingValue("jours_cycles_actif") == "Oui" and intval($jour_cycle)>-1)
             if (intval($jour_cycle)>0)
                 echo "<br /><b><i>".ucfirst(substr(get_vocab("rep_type_6"),0,1)).$jour_cycle."</i></b>";
@@ -479,7 +479,7 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
 
     echo "<tr>";
     tdcell("cell_hours");
-    echo htmlspecialchars($row[0]) ."</td>\n";
+    echo my_htmlspecialcharacters($row[0]) ."</td>\n";
     $li++;
     //Corrige un bug avec certains fuseaux horaires (par exemple GMT-05:00 celui du Québec) :
     //plusieurs mois débutent par le dernier jours du mois précédent.
@@ -529,7 +529,7 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
                echo "&nbsp;<img src=\"img_grr/flag_moderation.png\" alt=\"".get_vocab("en_attente_moderation")."\" title=\"".get_vocab("en_attente_moderation")."\" class=\"image\" />&nbsp;\n";
 
            if ($acces_fiche_reservation)
-             echo "<a title=\"".htmlspecialchars($d[$cday][$cmonth][$cyear]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday][$cmonth][$cyear]["id"][$i]."&amp;page=month\">"
+             echo "<a title=\"".my_htmlspecialcharacters($d[$cday][$cmonth][$cyear]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday][$cmonth][$cyear]["id"][$i]."&amp;page=month\">"
                     .$d[$cday][$cmonth][$cyear]["who1"][$i]{0}
                     . "</a>";
            else

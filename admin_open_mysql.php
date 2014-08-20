@@ -118,7 +118,7 @@ if (!$file_name) {
        $ok.="1";
     } else {
        $ok.="0";
-       $error .="<hr />".htmlspecialchars($line);
+       $error .="<hr />".my_htmlspecialcharacters($line);
     }
   }
   fclose($file);

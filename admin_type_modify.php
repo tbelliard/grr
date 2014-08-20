@@ -51,7 +51,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_type_modify.php";
 $ok = NULL;
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if(authGetUserLevel(getUserName(),-1) < 6)
 {
     $day   = date("d");
@@ -173,7 +173,7 @@ if (isset($_GET['change_type'])) {
     echo "<table border=\"1\">\n";
     echo "<tr>";
     echo "<td>".get_vocab("type_name").get_vocab("deux_points")."</td>\n";
-    echo "<td><input type=\"text\" name=\"type_name\" value=\"".htmlspecialchars($row["type_name"])."\" size=\"20\" /></td>\n";
+    echo "<td><input type=\"text\" name=\"type_name\" value=\"".my_htmlspecialcharacters($row["type_name"])."\" size=\"20\" /></td>\n";
     echo "</tr><tr>\n";
     echo "<td>".get_vocab("type_num").get_vocab("deux_points")."</td>\n";
     echo "<td>";
@@ -191,7 +191,7 @@ if (isset($_GET['change_type'])) {
     echo "</td>\n";
     echo "</tr><tr>\n";
     echo "<td>".get_vocab("type_order").get_vocab("deux_points")."</td>\n";
-    echo "<td><input type=\"text\" name=\"order_display\" value=\"".htmlspecialchars($row["order_display"])."\" size=\"20\" /></td>\n";
+    echo "<td><input type=\"text\" name=\"order_display\" value=\"".my_htmlspecialcharacters($row["order_display"])."\" size=\"20\" /></td>\n";
     echo "</tr>";
     echo "<tr><td>".get_vocab("disponible_pour").get_vocab("deux_points")."</td>\n";
 	echo "<td>"."<select name=\"disponible\" size=\"1\">\n";

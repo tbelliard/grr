@@ -121,7 +121,7 @@ if ((getSettingValue("authentification_obli")==0) and (getUserName()=='')) {
     $type_session = "with_session";
 }
 $back = "";
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 if ($type_session == "with_session") $_SESSION['type_month_all'] = "month_all";
 $type_month_all='month_all';
@@ -467,7 +467,7 @@ for ($cday = 1; $cday <= $days_in_month; $cday++)
     if ($display_day[$num_week_day] == 1) {// début condition "on n'affiche pas tous les jours de la semaine"
     echo "<td valign=\"top\" class=\"cell_month\">";
     // On affiche les jours du mois dans le coin supérieur gauche de chaque cellule
-    echo "<div class=\"monthday\"><a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year&amp;month=$month&amp;day=$cday&amp;area=$area\">".$name_day;
+    echo "<div class=\"monthday\"><a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year&amp;month=$month&amp;day=$cday&amp;area=$area\">".$name_day;
 	    if (getSettingValue("jours_cycles_actif") == "Oui" and intval($jour_cycle)>-1)
         if (intval($jour_cycle)>0)
             echo " - ".get_vocab("rep_type_6")." ".$jour_cycle;
@@ -499,14 +499,14 @@ for ($cday = 1; $cday <= $days_in_month; $cday++)
             echo "<span class=\"small_planning\">";
             echo $d[$cday]["data"][$i]
                 . "<br /><i><b>"
-                . htmlspecialchars($d[$cday]["room"][$i])
+                . my_htmlspecialcharacters($d[$cday]["room"][$i])
                 . "</b></i><br />";
            // si la réservation est à modérer, on le signale
            if ((isset($d[$cday]["moderation"][$i])) and ($d[$cday]["moderation"][$i]==1))
                echo "&nbsp;<img src=\"img_grr/flag_moderation.png\" alt=\"".get_vocab("en_attente_moderation")."\" title=\"".get_vocab("en_attente_moderation")."\" class=\"image\" />&nbsp;\n";
 
           if ($acces_fiche_reservation[$d[$cday]["id_room"][$i]])
-              echo "<a title=\"".htmlspecialchars($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]
+              echo "<a title=\"".my_htmlspecialcharacters($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]
               . "&amp;day=$cday&amp;month=$month&amp;year=$year&amp;page=month_all\">"
               . $d[$cday]["who1"][$i]
               . "</a>";

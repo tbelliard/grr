@@ -203,6 +203,10 @@ $insertComplet = false;
 # Global settings array
 $grrSettings = array();
 
+# Utilisé par my_htmlspecialcharacters pour compatibilité php 5.4
+define('CHARSET', 'ISO-8859-1');
+define('REPLACE_FLAGS', ENT_COMPAT | ENT_XHTML);
+
 # Make sure notice errors are not reported
 #error_reporting (E_ALL ^ E_NOTICE);
 ?>

@@ -59,7 +59,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_calend.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 $day   = date("d");
 $month = date("m");

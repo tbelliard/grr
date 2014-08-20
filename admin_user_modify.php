@@ -71,7 +71,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_user_modify.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 $day   = date("d");
 $month = date("m");
 $year  = date("Y");
@@ -316,11 +316,11 @@ if (isset($user_login) and ($user_login!='')) {
     if ($res) {
         for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
         {
-        $user_nom = htmlspecialchars($row[0]);
-        $user_prenom = htmlspecialchars($row[1]);
+        $user_nom = my_htmlspecialcharacters($row[0]);
+        $user_prenom = my_htmlspecialcharacters($row[1]);
         $user_statut = $row[2];
         $user_etat = $row[3];
-        $user_mail = htmlspecialchars($row[4]);
+        $user_mail = my_htmlspecialcharacters($row[4]);
         $user_source = $row[5];
         if ($user_source=="local")
           $flag_is_local="y";
@@ -405,16 +405,16 @@ if (isset($user_login) and ($user_login!='')) {
 
 echo "<table border=\"0\" cellpadding=\"5\"><tr>\n";
 echo "<td>".get_vocab("last_name")." *".get_vocab("deux_points")."</td>\n<td><input type=\"text\" name=\"reg_nom\" size=\"40\" value=\"";
-if ($user_nom) echo htmlspecialchars($user_nom);
+if ($user_nom) echo my_htmlspecialcharacters($user_nom);
 echo "\" /></td>\n";
 echo "<td>".get_vocab("first_name")." *".get_vocab("deux_points")."</td>\n<td><input type=\"text\" name=\"reg_prenom\" size=\"20\" value=\"";
-if ($user_nom) echo htmlspecialchars($user_prenom);
+if ($user_nom) echo my_htmlspecialcharacters($user_prenom);
 echo "\" /></td>\n";
 echo "<td></td><td></td>";
 echo "</tr>\n";
 
 echo "<tr><td>".get_vocab("mail_user").get_vocab("deux_points")."</td><td><input type=\"text\" name=\"reg_email\" size=\"30\" value=\"";
-if ($user_mail)  echo htmlspecialchars($user_mail);
+if ($user_mail)  echo my_htmlspecialcharacters($user_mail);
 echo "\" /></td>\n";
 
 echo "<td>".get_vocab("statut").get_vocab("deux_points")."</td>\n";

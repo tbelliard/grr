@@ -80,7 +80,7 @@ if (!isset($_GET['pview'])) $_GET['pview'] = 0; else $_GET['pview'] = 1;
 
     #Récupération des informations relatives au serveur.
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
     #Renseigne les droits de l'utilisateur, si les droits sont insufisants, l'utilisateur est avertit.
 if (!verif_access_search(getUserName()))
 {
@@ -140,12 +140,12 @@ function reporton(&$row, $dformat)
   global $vocab, $enable_periods;
     echo "<tr>";
     #Affiche "area"
-    $area_nom = htmlspecialchars($row[8]);
-    $areadescrip = htmlspecialchars($row[10]);
+    $area_nom = my_htmlspecialcharacters($row[8]);
+    $areadescrip = my_htmlspecialcharacters($row[10]);
     if ($areadescrip != "") $titre_area_descript = "title=\"".$areadescrip."\""; else $titre_area_descript = "";
     echo "<td ".$titre_area_descript." >".$area_nom."</td>";
     #Affiche "room"
-    $room = htmlspecialchars($row[9]);
+    $room = my_htmlspecialcharacters($row[9]);
     echo "<td>".$room."</td>";
 
     # Breve description (title), avec un lien
@@ -169,7 +169,7 @@ function reporton(&$row, $dformat)
     }
     #Description
     if ($row[4] != "")
-        $description = nl2br(htmlspecialchars($row[4]));
+        $description = nl2br(my_htmlspecialcharacters($row[4]));
     else
         $description = "&nbsp;";
     echo "<td>". $description . "</td>\n";
@@ -184,7 +184,7 @@ function reporton(&$row, $dformat)
     $res_beneficiaire = grr_sql_query($sql_beneficiaire);
     if ($res_beneficiaire) $row_user = grr_sql_row($res_beneficiaire, 0);
 
-    echo "<td>".htmlspecialchars($row_user[0]) ." ". htmlspecialchars($row_user[1])."</td>";
+    echo "<td>".my_htmlspecialcharacters($row_user[0]) ." ". my_htmlspecialcharacters($row_user[1])."</td>";
 
     #Affichage de la date de la dernière mise à jour
 
@@ -218,9 +218,9 @@ function accumulate(&$row, &$count, &$hours, $report_start, $report_end,
       # [5]   Type -> e.type
       # [6]   réservé par (nom ou IP), (HTML) -> e.beneficiaire
       # [12]  les champs additionnele -> e.overload_desc
-      $breve_description = htmlspecialchars($temp);
+      $breve_description = my_htmlspecialcharacters($temp);
       #   $row[8] : Area , $row[9]:Room
-      $room = htmlspecialchars($row[8]) .$vocab["deux_points"]. "<br />" . htmlspecialchars($row[9]);
+      $room = my_htmlspecialcharacters($row[8]) .$vocab["deux_points"]. "<br />" . my_htmlspecialcharacters($row[9]);
     } else {
       $breve_description = ($temp);
       #   $row[8] : Area , $row[9]:Room
@@ -248,9 +248,9 @@ function accumulate_periods(&$row, &$count, &$hours, $report_start, $report_end,
         $temp = grrExtractValueFromOverloadDesc($row[12],$_GET["sumby"]);
     if ($temp == "") $temp = "(Autres)";
     if ($csv == "n") {
-        $breve_description = htmlspecialchars($temp);
+        $breve_description = my_htmlspecialcharacters($temp);
         # Area and room separated by break:
-        $room = htmlspecialchars($row[8]) .$vocab["deux_points"]. "<br />" . htmlspecialchars($row[9]);
+        $room = my_htmlspecialcharacters($row[8]) .$vocab["deux_points"]. "<br />" . my_htmlspecialcharacters($row[9]);
     } else {
         # Use brief description or created by as the name:
         $breve_description = ($temp);
@@ -402,7 +402,7 @@ if (isset($champ[0]))
     while ($k < count($texte)) {
         $texte[$k] = unslashes($texte[$k]);
         #Mettre les valeurs par défaut quand le formulaire est réutilisé.
-        $texte_default[$k] = htmlspecialchars($texte[$k]);
+        $texte_default[$k] = my_htmlspecialcharacters($texte[$k]);
         $k++;
     }
 
@@ -579,7 +579,7 @@ if (isset($_GET["is_posted"]))
     // Affichage d'un lien pour format imprimable
     if (( !isset($_GET['pview'])  or ($_GET['pview'] != 1)) and (($summarize != 4) and ($summarize != 5))) {
         echo '<p style="text-align:center;">
-        <a href="' . traite_grr_url("","y")."report.php" . '?' . htmlspecialchars($_SERVER['QUERY_STRING']) . '&amp;pview=1" ';
+        <a href="' . traite_grr_url("","y")."report.php" . '?' . my_htmlspecialcharacters($_SERVER['QUERY_STRING']) . '&amp;pview=1" ';
         if (getSettingValue("pview_new_windows")==1) echo ' target="_blank"';
         echo '>' . get_vocab("ppreview") . '</a>
         </p>';

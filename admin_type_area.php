@@ -55,7 +55,7 @@ $id_area = isset($_GET["id_area"]) ? $_GET["id_area"] : NULL;
 if(authGetUserLevel(getUserName(),$id_area,'area') < 4)
 {
     $back = '';
-    if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+    if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
     $day   = date("d");
     $month = date("m");
     $year  = date("Y");
@@ -64,7 +64,7 @@ if(authGetUserLevel(getUserName(),$id_area,'area') < 4)
 }
 
 $back = "";
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 // Gestion du retour à la page précédente sans enregistrement
 if (isset($_GET['change_done']))

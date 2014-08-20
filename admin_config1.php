@@ -483,7 +483,7 @@ if (getSettingValue("use_fckeditor") != 1)
     echo " ".get_vocab("description complete2");
 if (getSettingValue("use_fckeditor") == 1) {
       echo "<textarea class=\"ckeditor\" id=\"editor1\" name=\"message_accueil\" rows=\"8\" cols=\"120\">\n";
-      echo htmlspecialchars(getSettingValue('message_accueil'));
+      echo my_htmlspecialcharacters(getSettingValue('message_accueil'));
       echo "</textarea>\n";
 ?>
       <script type="text/javascript">
@@ -507,7 +507,7 @@ if (getSettingValue("use_fckeditor") == 1) {
 		</script>
 <?php
     } else {
-        echo "\n<textarea name=\"message_accueil\" rows=\"8\" cols=\"120\">".htmlspecialchars(getSettingValue('message_accueil'))."</textarea>\n";
+        echo "\n<textarea name=\"message_accueil\" rows=\"8\" cols=\"120\">".my_htmlspecialcharacters(getSettingValue('message_accueil'))."</textarea>\n";
     }
 echo "</p>";
 
@@ -610,7 +610,7 @@ else
       echo '              <option value="'.$row[0].'"';
       if (getSettingValue("default_site") == $row[0])
         echo ' selected="selected" ';
-      echo '>'.htmlspecialchars($row[2]);
+      echo '>'.my_htmlspecialcharacters($row[2]);
       echo '</option>'."\n";
   }
   echo('            </select>

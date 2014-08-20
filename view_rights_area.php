@@ -106,7 +106,7 @@ grr_sql_free($res);
 
 ?>
 
-<h3 style="text-align:center;"><?php echo get_vocab("match_area").get_vocab("deux_points")."&nbsp;".htmlspecialchars($row["area_name"]);
+<h3 style="text-align:center;"><?php echo get_vocab("match_area").get_vocab("deux_points")."&nbsp;".my_htmlspecialcharacters($row["area_name"]);
 $area_access = $row["access"];
 if ($area_access == 'r') echo " (<span class=\"avertissement\">".get_vocab("access")."</span>)";
 echo "</h3>";

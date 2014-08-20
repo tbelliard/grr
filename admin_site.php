@@ -365,7 +365,7 @@ echo '          </td>
  {
    $back = '';
    if (isset($_SERVER['HTTP_REFERER']))
-     $back=htmlspecialchars($_SERVER['HTTP_REFERER']);
+     $back=my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
    $day   = date('d');
    $month = date('m');
    $year  = date('Y');
@@ -375,7 +375,7 @@ echo '          </td>
 
  $back = NULL;
  if (isset($_SERVER['HTTP_REFERER']))
-   $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+   $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
  // print the page header
  print_header(NULL,NULL,NULL,NULL,$type='with_session',$page='admin');

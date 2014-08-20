@@ -87,7 +87,7 @@ else
 // On vérifie que l'utilisateur a bien le droit d'être ici
 $room_id = grr_sql_query1("select room_id from ".TABLE_PREFIX."_entry where id='".$_POST['id']."'");
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if (authGetUserLevel(getUserName(),$room_id) < 3)
 {
     showAccessDenied($day, $month, $year, '',$back);

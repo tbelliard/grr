@@ -114,7 +114,7 @@ if (isset($_GET["id"]))
 }
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 if (isset($_GET["action_moderate"])) {
     // on modère
@@ -194,10 +194,10 @@ else {
 grr_sql_free($res);
 
 $breve_description = $row[0];
-$description  = bbcode(htmlspecialchars($row[1]),'');
-$beneficiaire    = htmlspecialchars($row[2]);
-$room_name    = htmlspecialchars($row[3]);
-$area_name    = htmlspecialchars($row[4]);
+$description  = bbcode(my_htmlspecialcharacters($row[1]),'');
+$beneficiaire    = my_htmlspecialcharacters($row[2]);
+$room_name    = my_htmlspecialcharacters($row[3]);
+$area_name    = my_htmlspecialcharacters($row[4]);
 $type         = $row[5];
 $room_id      = $row[6];
 $repeat_id    = $row[7];
@@ -208,10 +208,10 @@ $statut_id = $row[13];
 $delais_option_reservation = $row[14];
 $option_reservation = $row[15];
 $moderate = $row[16];
-$beneficiaire_ext    = htmlspecialchars($row[17]);
-$create_by    = htmlspecialchars($row[18]);
-$jour_cycle    = htmlspecialchars($row[19]);
-$active_ressource_empruntee = htmlspecialchars($row[20]);
+$beneficiaire_ext    = my_htmlspecialcharacters($row[17]);
+$create_by    = my_htmlspecialcharacters($row[18]);
+$jour_cycle    = my_htmlspecialcharacters($row[19]);
+$active_ressource_empruntee = my_htmlspecialcharacters($row[20]);
 $rep_type = 0;
 $verif_display_email = verif_display_email(getUserName(), $room_id);
 if ($verif_display_email)
@@ -356,8 +356,8 @@ echo '<fieldset><legend style="font-size:12pt;font-weight:bold">'.get_vocab('ent
                else
                    $affiche_champ = 'n';
         if ($affiche_champ == 'y') {
-            echo "<tr><td><b>".bbcode(htmlspecialchars($fieldname).get_vocab("deux_points"),'')."</b></td>\n";
-            echo "<td>".bbcode(htmlspecialchars($fielddata["valeur"]),'')."</td></tr>\n";
+            echo "<tr><td><b>".bbcode(my_htmlspecialcharacters($fieldname).get_vocab("deux_points"),'')."</b></td>\n";
+            echo "<td>".bbcode(my_htmlspecialcharacters($fielddata["valeur"]),'')."</td></tr>\n";
         }
       }
     }

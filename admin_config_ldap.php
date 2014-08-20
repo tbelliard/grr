@@ -208,7 +208,7 @@ if ((!grr_resumeSession()) and $valid!='yes') {
 };
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if ((isset($sso_restrictions)) and ($sso_restrictions==true)) {
     $day   = date("d");
     $month = date("m");
@@ -358,13 +358,13 @@ if ($etape == 3) {
                 if (is_array($names)) {
                     for ($j = 0; $j < count($names); $j++) {
                         $n++;
-                        echo "<br /><input name=\"base_ldap\" value=\"".htmlspecialchars($names[$j])."\" type='radio' id='tab$n'";
+                        echo "<br /><input name=\"base_ldap\" value=\"".my_htmlspecialcharacters($names[$j])."\" type='radio' id='tab$n'";
                         if (!$checked) {
                             echo " checked=\"checked\"";
                             $checked = true;
                         }
                         echo " />\n";
-                        echo "<label for='tab$n'>".htmlspecialchars($names[$j])."</label>\n";
+                        echo "<label for='tab$n'>".my_htmlspecialcharacters($names[$j])."</label>\n";
                     }
                 }
             }

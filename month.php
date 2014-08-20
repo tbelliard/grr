@@ -143,7 +143,7 @@ else
 }
     #Récupération des informations relatives au serveur.
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
     #Renseigne les droits de l'utilisateur, si les droits sont insufisants, l'utilisateur est avertit.
 if (check_begin_end_bookings($day, $month, $year))
 {
@@ -483,7 +483,7 @@ for ($cday = 1; $cday <= $days_in_month; $cday++)
 	$jour_cycle = grr_sql_query1("SELECT Jours FROM ".TABLE_PREFIX."_calendrier_jours_cycle WHERE DAY='$t'");
     if ($weekcol == 0) echo "<tr>\n";
     if ($display_day[$num_week_day] == 1) {// début condition "on n'affiche pas tous les jours de la semaine"
-    echo "<td valign=\"top\" class=\"cell_month\">\n<div class=\"monthday\"><a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year&amp;month=$month&amp;day=$cday&amp;area=$area\">".$name_day;
+    echo "<td valign=\"top\" class=\"cell_month\">\n<div class=\"monthday\"><a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\"   href=\"day.php?year=$year&amp;month=$month&amp;day=$cday&amp;area=$area\">".$name_day;
     if (getSettingValue("jours_cycles_actif") == "Oui" and intval($jour_cycle)>-1)
         if (intval($jour_cycle)>0)
             echo " - ".get_vocab("rep_type_6")." ".$jour_cycle;
@@ -514,7 +514,7 @@ for ($cday = 1; $cday <= $days_in_month; $cday++)
                 if ((isset($d[$cday]["moderation"][$i])) and ($d[$cday]["moderation"][$i]==1))
                    echo "&nbsp;<img src=\"img_grr/flag_moderation.png\" alt=\"".get_vocab("en_attente_moderation")."\" title=\"".get_vocab("en_attente_moderation")."\" class=\"image\" />&nbsp;\n";
                 if ($acces_fiche_reservation)
-                    echo "<a title=\"".htmlspecialchars($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]
+                    echo "<a title=\"".my_htmlspecialcharacters($d[$cday]["who"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]
                     . "&amp;day=$cday&amp;month=$month&amp;year=$year&amp;page=month\">"
                     . $d[$cday]["who1"][$i]
                     . "</a>";

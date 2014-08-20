@@ -50,7 +50,7 @@ if (isset($room)) settype($room,"integer");
 if (!isset($id_area)) settype($id_area,"integer");
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if(authGetUserLevel(getUserName(),-1,'area') < 4)
 {
     $day   = date("d");
@@ -167,7 +167,7 @@ $out_html .= "<option value=\"admin_email_manager.php?id_area=-1\">".get_vocab('
         $link = "admin_email_manager.php?id_area=$row[0]";
         // On affiche uniquement les domaines administrés par l'utilisateur
         if(authGetUserLevel(getUserName(),$row[0],'area') >= 4)
-            $out_html .= "<option $selected value=\"$link\">" . htmlspecialchars($row[1])."</option>\n";
+            $out_html .= "<option $selected value=\"$link\">" . my_htmlspecialcharacters($row[1])."</option>\n";
        }
     $out_html .= "</select></div>
     <script type=\"text/javascript\" >
@@ -209,10 +209,10 @@ $out_html .= "<option value=\"admin_email_manager.php?id_area=$id_area&amp;room=
        $res = grr_sql_query($sql);
        if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
        {
-        if ($row[2]) {$temp = " (".htmlspecialchars($row[2]).")";} else {$temp="";}
+        if ($row[2]) {$temp = " (".my_htmlspecialcharacters($row[2]).")";} else {$temp="";}
         $selected = ($row[0] == $room) ? "selected=\"selected\"" : "";
         $link = "admin_email_manager.php?id_area=$id_area&amp;room=$row[0]";
-        $out_html .= "<option $selected value=\"$link\">" . htmlspecialchars($row[1].$temp)."</option>\n";
+        $out_html .= "<option $selected value=\"$link\">" . my_htmlspecialcharacters($row[1].$temp)."</option>\n";
        }
     $out_html .= "</select></div>\n
        <script type=\"text/javascript\" >
@@ -259,8 +259,8 @@ if ($room=='-1') {
     if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
         {
         $login_admin = $row[0];
-        $nom_admin = htmlspecialchars($row[1]);
-        $prenom_admin = htmlspecialchars($row[2]);
+        $nom_admin = my_htmlspecialcharacters($row[1]);
+        $prenom_admin = my_htmlspecialcharacters($row[2]);
         echo "<b>";
         echo "$nom_admin $prenom_admin</b> | <a href='admin_email_manager.php?action=del_admin&amp;login_admin=".urlencode($login_admin)."&amp;room=$room&amp;id_area=$id_area'>".get_vocab("delete")."</a><br />";
     }
@@ -278,7 +278,7 @@ $sql = "SELECT DISTINCT login, nom, prenom FROM ".TABLE_PREFIX."_utilisateurs WH
 $res = grr_sql_query($sql);
 if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
     if (authUserAccesArea($row[0],$id_area) == 1) {
-        echo "<option value=\"$row[0]\">".htmlspecialchars($row[1])." ".htmlspecialchars($row[2])." </option>";
+        echo "<option value=\"$row[0]\">".my_htmlspecialcharacters($row[1])." ".my_htmlspecialcharacters($row[2])." </option>";
     }
 }
 ?>

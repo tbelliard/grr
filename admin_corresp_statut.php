@@ -32,7 +32,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_config_sso.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if (getSettingValue("sso_ac_corr_profil_statut")!='y') {
     $day   = date("d");
     $month = date("m");
@@ -95,7 +95,7 @@ if ((isset($_GET['action_del'])) and ($_GET['js_confirmed'] ==1) and ($_GET['act
 
 
 $back = "";
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 # print the page header
 print_header("","","","",$type="with_session", $page="admin");

@@ -113,7 +113,7 @@ if ($_GET['type']=="domaine") {
     $display_liste .=  '              <option value="'.$row[0].'"';
     if ($default_area == $row[0])
       $display_liste .= ' selected="selected" ';
-    $display_liste .= '>'.htmlspecialchars($row[1]);
+    $display_liste .= '>'.my_htmlspecialcharacters($row[1]);
     if ($row[2]=='r')
       $display_liste .= ' ('.get_vocab('restricted').')';
     $display_liste .= '</option>'."\n";
@@ -191,7 +191,7 @@ if ($_GET['type']=="ressource") {
        $display_liste .=  '              <option value="'.$row[0].'"';
        if ($default_room == $row[0])
          $display_liste .= ' selected="selected" ';
-       $display_liste .= '>'.htmlspecialchars($row[1]).' '.get_vocab('display_week');
+       $display_liste .= '>'.my_htmlspecialcharacters($row[1]).' '.get_vocab('display_week');
        $display_liste .= '</option>'."\n";
     }
 

@@ -80,7 +80,7 @@ settype($id_site,"integer");
 if(authGetUserLevel(getUserName(),-1,'area') < 4)
 {
     $back = '';
-    if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+    if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
     $day   = date("d");
     $month = date("m");
     $year  = date("Y");
@@ -165,7 +165,7 @@ if ($nb_site > 1) {
      echo '            <option value="'.$row[0].'"';
      if ($id_site == $row[0])
        echo ' selected="selected"';
-     echo '>'.htmlspecialchars($row[2]);
+     echo '>'.my_htmlspecialcharacters($row[2]);
      echo '            </option>'."\n";
    }
   grr_sql_free($res);
@@ -209,7 +209,7 @@ if ($nb_site > 1) {
 <tr>
 <th  style="text-align:center; width:50%;"><b><?php echo get_vocab('areas') ?></b></th>
 <th  style="text-align:center; width:50%;"><b><?php echo get_vocab('rooms') ?> <?php if(isset($id_area)) { echo get_vocab('in') . " " .
-  htmlspecialchars($area_name); }?></b></th>
+  my_htmlspecialcharacters($area_name); }?></b></th>
 </tr>
 <?php
 // Seul l'administrateur a le droit d'ajouter des domaines
@@ -262,10 +262,10 @@ if (grr_sql_count($res) != 0) {
             else
                 echo "<td>&nbsp;</td>\n";
             if(isset($id_area) and ($id_area==$row[0])) {
-                echo "<td><span class=\"bground\"><b>&gt;&gt;&gt; ".htmlspecialchars($row[1])." &lt;&lt;&lt; </b></span>";
+                echo "<td><span class=\"bground\"><b>&gt;&gt;&gt; ".my_htmlspecialcharacters($row[1])." &lt;&lt;&lt; </b></span>";
             } else {
                 echo "<td><a href=\"admin_room.php?id_site=".$id_site."&amp;id_area=$row[0]\">"
-                . htmlspecialchars($row[1]) . "</a> ";
+                . my_htmlspecialcharacters($row[1]) . "</a> ";
             }
             echo "</td>\n";
             echo "<td><a href=\"admin_edit_room.php?id_area=$row[0]\"><img src=\"img_grr/edit_s.png\" alt=\"". get_vocab("edit") ."\" title=\"".get_vocab("edit")."\" class=\"image\" /></a></td>\n";
@@ -299,7 +299,7 @@ if (grr_sql_count($res) != 0) {
             for ($i = 0; ($row = grr_sql_row($res, $i)); $i++) {
                 $color = '';
                 if ($row[5] == "0") $color =  " class=\"texte_ress_tempo_indispo\"";
-                echo "<tr><td ".$color.">" . htmlspecialchars($row[1]) . "<i> - " . htmlspecialchars($row[2]);
+                echo "<tr><td ".$color.">" . my_htmlspecialcharacters($row[1]) . "<i> - " . my_htmlspecialcharacters($row[2]);
 				if ($row[3]>0) echo " ($row[3] max.)";
                 echo "</i></td>\n<td><a href=\"admin_edit_room.php?room=$row[0]\"><img src=\"img_grr/edit_s.png\" alt=\"".get_vocab('edit')."\" title=\"".get_vocab('edit')."\" class=\"image\" /></a></td>\n";
                 echo "<td><a href=\"admin_edit_room.php?room=$row[0]&amp;action=duplique_room\"><img src=\"img_grr/duplique.png\" alt=\"".get_vocab('duplique_ressource')."\" title=\"".get_vocab('duplique_ressource')."\" class=\"image\" /></a></td>";

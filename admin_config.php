@@ -39,7 +39,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_config.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 $_SESSION['chemin_retour'] = "admin_config.php";
 

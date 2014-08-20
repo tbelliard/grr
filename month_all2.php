@@ -124,7 +124,7 @@ if ($type_session == "with_session") $_SESSION['type_month_all'] = "month_all2";
 $type_month_all="month_all2";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 
 if (check_begin_end_bookings($day, $month, $year))
@@ -501,7 +501,7 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
     // Calcul du niveau d'accès aux fiche de réservation détaillées des ressources
     $acces_fiche_reservation = verif_acces_fiche_reservation(getUserName(), $row[2]);
 
-    echo "<tr><th>" . htmlspecialchars($row[0]) ."</th>\n";
+    echo "<tr><th>" . my_htmlspecialcharacters($row[0]) ."</th>\n";
     $li++;
     //Corrige un bug avec certains fuseaux horaires (par exemple GMT-05:00 celui du Québec) :
     //plusieurs mois débutent par le dernier jours du mois précédent.
@@ -542,7 +542,7 @@ for ($ir = 0; ($row = grr_sql_row($res, $ir)); $ir++)
                             echo "&nbsp;<img src=\"img_grr/flag_moderation.png\" alt=\"".get_vocab("en_attente_moderation")."\" title=\"".get_vocab("en_attente_moderation")."\" class=\"image\" />&nbsp;\n";
                         echo "<span class=\"small_planning\">";
                         if ($acces_fiche_reservation)
-                            echo "<a title=\"".htmlspecialchars($d[$cday]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]."&amp;page=month\">"
+                            echo "<a title=\"".my_htmlspecialcharacters($d[$cday]["data"][$i])."\" href=\"view_entry.php?id=" . $d[$cday]["id"][$i]."&amp;page=month\">"
                             .$d[$cday]["who1"][$i]{0}
                             . "</a>";
                         else

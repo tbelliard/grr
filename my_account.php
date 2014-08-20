@@ -113,7 +113,7 @@
 
  $back = '';
  if (isset($_SERVER['HTTP_REFERER']))
-   $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+   $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 /*
  if (!(IsAllowedToModifyMdp()) and !(IsAllowedToModifyProfil()) and !(IsAllowedToModifyEmail()))
  {
@@ -199,14 +199,14 @@
       {
        $sql.="nom = '" . protect_data_sql($reg_nom)."'";
        $flag_virgule = 'y';
-       $_SESSION['nom'] = htmlspecialchars($reg_nom);
+       $_SESSION['nom'] = my_htmlspecialcharacters($reg_nom);
       }
       if (trim($reg_prenom) != '')
       {
        if ($flag_virgule == 'y') $sql .=",";
        $sql .= "prenom = '" . protect_data_sql($reg_prenom)."'";
        $flag_virgule = 'y';
-       $_SESSION['prenom'] = htmlspecialchars($reg_prenom);
+       $_SESSION['prenom'] = my_htmlspecialcharacters($reg_prenom);
       }
      }
 
@@ -399,7 +399,7 @@
    echo('
           <td><input type="text" name="reg_nom" value="');
    if ($user_nom)
-     echo htmlspecialchars($user_nom);
+     echo my_htmlspecialcharacters($user_nom);
    echo('" size="30" /></td>
         </tr>');
 
@@ -409,7 +409,7 @@
           <td><b>'.get_vocab('first_name').get_vocab('deux_points').'</b>*</td>
           <td><input type="text" name="reg_prenom" value="');
    if ($user_prenom)
-     echo htmlspecialchars($user_prenom);
+     echo my_htmlspecialcharacters($user_prenom);
    echo('" size="30" /></td>
         </tr>');
  }
@@ -429,7 +429,7 @@
           <td><b>'.get_vocab('mail_user').get_vocab('deux_points').'</b></td>
           <td><input type="text" name="reg_email" value="');
    if ($user_email)
-     echo htmlspecialchars($user_email);
+     echo my_htmlspecialcharacters($user_email);
    echo('" size="30" /></td>
         </tr>');
  }
@@ -547,7 +547,7 @@ else
       echo '              <option value="'.$row[0].'"';
       if ($default_site == $row[0])
         echo ' selected="selected" ';
-      echo '>'.htmlspecialchars($row[2]);
+      echo '>'.my_htmlspecialcharacters($row[2]);
       echo '</option>'."\n";
 
   }

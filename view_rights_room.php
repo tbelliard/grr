@@ -105,7 +105,7 @@ grr_sql_free($res);
 
 ?>
 
-<h3 style="text-align:center;"><?php echo get_vocab("room").get_vocab("deux_points")."&nbsp;".htmlspecialchars($row["room_name"]);
+<h3 style="text-align:center;"><?php echo get_vocab("room").get_vocab("deux_points")."&nbsp;".my_htmlspecialcharacters($row["room_name"]);
 $id_area = mrbsGetRoomArea($id_room);
 $area_name = grr_sql_query1("select area_name from ".TABLE_PREFIX."_area where id='".$id_area."'");
 $area_access = grr_sql_query1("select access from ".TABLE_PREFIX."_area where id='".$id_area."'");

@@ -63,7 +63,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_user.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 $display = isset($_GET["display"]) ? $_GET["display"] : NULL;
 $order_by = isset($_GET["order_by"]) ? $_GET["order_by"] : NULL;
 $msg = '';
@@ -386,8 +386,8 @@ if ($res) {
     for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
     {
 
-    $user_nom = htmlspecialchars($row[0]);
-    $user_prenom = htmlspecialchars($row[1]);
+    $user_nom = my_htmlspecialcharacters($row[0]);
+    $user_prenom = my_htmlspecialcharacters($row[1]);
     $user_statut = $row[2];
     $user_login = $row[3];
     $user_etat[$i] = $row[4];

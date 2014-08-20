@@ -37,7 +37,7 @@ $grr_script_name = "admin_overload.php";
 if(authGetUserLevel(getUserName(),-1,'area') < 4)
 {
     $back = '';
-    if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+    if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
     $day   = date("d");
     $month = date("m");
     $year  = date("Y");
@@ -287,7 +287,7 @@ foreach( $userdomain as $key=>$value )
     $html .= "<td><form method=\"post\" action=\"admin_overload.php\">\n";
     $html .= "<div><input type=\"hidden\" name=\"id_overload\" value=\"$row[0]\" />\n";
     $html .= "<input type=\"hidden\" name=\"action\" value=\"change\" />\n";
-    $html .= "<input type=\"text\" name=\"fieldname\" value=\"".htmlspecialchars($row[1])."\" />\n";
+    $html .= "<input type=\"text\" name=\"fieldname\" value=\"".my_htmlspecialcharacters($row[1])."\" />\n";
     $html .= "<select name=\"fieldtype\">\n";
     $html .= "<option value=\"textarea\" ";
     if ($row[2] =="textarea") $html .= " selected=\"selected\"";

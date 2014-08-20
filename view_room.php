@@ -110,7 +110,7 @@ $row = grr_sql_row_keyed($res, 0);
 grr_sql_free($res);
 
 ?>
-<h3 style="text-align:center;"><?php echo get_vocab("room").get_vocab("deux_points")."&nbsp;".htmlspecialchars($row["room_name"]);
+<h3 style="text-align:center;"><?php echo get_vocab("room").get_vocab("deux_points")."&nbsp;".my_htmlspecialcharacters($row["room_name"]);
 
 $id_area = mrbsGetRoomArea($id_room);
 $area_name = grr_sql_query1("select area_name from ".TABLE_PREFIX."_area where id='".$id_area."'");
@@ -124,7 +124,7 @@ if ($row['statut_room'] == "0")
     echo "<h2 style=\"text-align:center;\"><span class=\"avertissement\">".get_vocab("ressource_temporairement_indisponible")."</span></h2>";
 
 echo "<h3>".get_vocab("description")."</h3>\n";
-echo "<div>".htmlspecialchars($row["description"])."&nbsp;</div>\n";
+echo "<div>".my_htmlspecialcharacters($row["description"])."&nbsp;</div>\n";
 if ($row["comment_room"] != '') {
     echo "<h3>".get_vocab("match_descr")."</h3>\n";
     echo "<div>".$row["comment_room"]."</div>\n";

@@ -198,7 +198,7 @@ if (!isset($_GET['rooms'][0])) {
     include "include/trailer.inc.php";
     die();
 }
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 
 // On récupère la valeur de $area
 $area = mrbsGetRoomArea($_GET['rooms'][0]);

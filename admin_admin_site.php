@@ -62,7 +62,7 @@ if (!isset($id_site)) settype($id_site,"integer");
 
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 if(authGetUserLevel(getUserName(),-1) < 6)
 {
     $day   = date("d");
@@ -124,7 +124,7 @@ if ($res) for ($i = 0; ($row = grr_sql_row($res, $i)); $i++)
 {
     $selected = ($row[0] == $id_site) ? "selected=\"selected\"" : "";
     $link = "admin_admin_site.php?id_site=$row[0]";
-    $out_html .= "<option $selected value=\"$link\">" . htmlspecialchars($row[1])."</option>";
+    $out_html .= "<option $selected value=\"$link\">" . my_htmlspecialcharacters($row[1])."</option>";
 }
 $out_html .= "</select>
 <script type=\"text/javascript\" >

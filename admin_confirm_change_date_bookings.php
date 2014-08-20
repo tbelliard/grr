@@ -48,7 +48,7 @@ include "include/admin.inc.php";
 $grr_script_name = "admin_confirm_change_date_bookings.php";
 
 $back = '';
-if (isset($_SERVER['HTTP_REFERER'])) $back = htmlspecialchars($_SERVER['HTTP_REFERER']);
+if (isset($_SERVER['HTTP_REFERER'])) $back = my_htmlspecialcharacters($_SERVER['HTTP_REFERER']);
 unset($display);
 $display = isset($_GET["display"]) ? $_GET["display"] : NULL;
 if(authGetUserLevel(getUserName(),-1) < 6)

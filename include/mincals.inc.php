@@ -90,8 +90,8 @@ get_planning_area_values($area);
     function getDateLink($day, $month, $year)
         {
        global $vocab;
-      if ($this->dmy=='day') return "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\" href=\"".$this->dmy.".php?year=$year&amp;month=$month&amp;day=$day&amp;area=".$this->area."\"";
-      if ($this->dmy!='day') return "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_day"))."\" href=\"day.php?year=$year&amp;month=$month&amp;day=$day&amp;area=".$this->area."\"";
+      if ($this->dmy=='day') return "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\" href=\"".$this->dmy.".php?year=$year&amp;month=$month&amp;day=$day&amp;area=".$this->area."\"";
+      if ($this->dmy!='day') return "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_day"))."\" href=\"day.php?year=$year&amp;month=$month&amp;day=$day&amp;area=".$this->area."\"";
 
     }
 
@@ -125,24 +125,24 @@ get_planning_area_values($area);
           $lastmonth = date("m",$tmp);
           $lastyear= date("Y",$tmp);
           if (($this->dmy!='day') and ($this->dmy!='week_all') and ($this->dmy!='month_all') and ($this->dmy!='month_all2'))
-           $s .= "<a title=\"".htmlspecialchars(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$lastyear&amp;month=$lastmonth&amp;day=1&amp;area=$this->area&amp;room=$this->room\">&lt;&lt;</a>&nbsp;&nbsp;&nbsp;";
+           $s .= "<a title=\"".my_htmlspecialcharacters(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$lastyear&amp;month=$lastmonth&amp;day=1&amp;area=$this->area&amp;room=$this->room\">&lt;&lt;</a>&nbsp;&nbsp;&nbsp;";
           else
-           $s .= "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$lastyear&amp;month=$lastmonth&amp;day=1&amp;area=$this->area\">&lt;&lt;</a>&nbsp;&nbsp;&nbsp;";
+           $s .= "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$lastyear&amp;month=$lastmonth&amp;day=1&amp;area=$this->area\">&lt;&lt;</a>&nbsp;&nbsp;&nbsp;";
         }
 
             if (($this->dmy!='day') and ($this->dmy!='week_all') and ($this->dmy!='month_all') and ($this->dmy!='month_all2'))
-         $s .= "<a title=\"".htmlspecialchars(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$this->year&amp;month=$this->month&amp;day=1&amp;area=$this->area&amp;room=$this->room\">$monthName&nbsp;$this->year</a>";
+         $s .= "<a title=\"".my_htmlspecialcharacters(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$this->year&amp;month=$this->month&amp;day=1&amp;area=$this->area&amp;room=$this->room\">$monthName&nbsp;$this->year</a>";
             else
-         $s .= "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$this->year&amp;month=$this->month&amp;day=1&amp;area=$this->area\">$monthName&nbsp;$this->year</a>";
+         $s .= "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$this->year&amp;month=$this->month&amp;day=1&amp;area=$this->area\">$monthName&nbsp;$this->year</a>";
         // on ajoute un lien vers le mois suivant
         if ($this->mois_suivant == 1) {
           $tmp = mktime(0, 0, 0, ($this->month)+1, 1, $this->year);
           $nextmonth = date("m",$tmp);
           $nextyear= date("Y",$tmp);
           if (($this->dmy!='day') and ($this->dmy!='week_all') and ($this->dmy!='month_all') and ($this->dmy!='month_all2'))
-           $s .= "&nbsp;&nbsp;&nbsp;<a title=\"".htmlspecialchars(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$nextyear&amp;month=$nextmonth&amp;day=1&amp;area=$this->area&amp;room=$this->room\">&gt;&gt;</a>";
+           $s .= "&nbsp;&nbsp;&nbsp;<a title=\"".my_htmlspecialcharacters(get_vocab("see_month_for_this_room"))."\" href=\"month.php?year=$nextyear&amp;month=$nextmonth&amp;day=1&amp;area=$this->area&amp;room=$this->room\">&gt;&gt;</a>";
           else
-           $s .= "&nbsp;&nbsp;&nbsp;<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$nextyear&amp;month=$nextmonth&amp;day=1&amp;area=$this->area\">&gt;&gt;</a>";
+           $s .= "&nbsp;&nbsp;&nbsp;<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_the_month"))."\" href=\"".$type_month_all.".php?year=$nextyear&amp;month=$nextmonth&amp;day=1&amp;area=$this->area\">&gt;&gt;</a>";
         }
         $s .= "</td>\n";
         $s .= "</tr>\n";
@@ -158,9 +158,9 @@ get_planning_area_values($area);
             $s .= "<tr ".$bg_lign."><td class=\"calendarcol1\" align=\"right\" valign=\"top\">";
             #Affichage du numéro de la semaine en cours à droite du calendrier et génère un lien sur la semaine voulue.
             if (($this->dmy!='day') and ($this->dmy!='week_all') and ($this->dmy!='month_all') and ($this->dmy!='month_all2'))
-               $s .="<a title=\"".htmlspecialchars(get_vocab("see_week_for_this_room"))."\" href=\"week.php?year=$this->year&amp;month=$this->month&amp;day=$temp&amp;area=$this->area&amp;room=$this->room\">s".sprintf("%02d",$week)."</a>";
+               $s .="<a title=\"".my_htmlspecialcharacters(get_vocab("see_week_for_this_room"))."\" href=\"week.php?year=$this->year&amp;month=$this->month&amp;day=$temp&amp;area=$this->area&amp;room=$this->room\">s".sprintf("%02d",$week)."</a>";
             else
-                $s .="<a title=\"".htmlspecialchars(get_vocab("see_week_for_this_area"))."\" href=\"week_all.php?year=$this->year&amp;month=$this->month&amp;day=$temp&amp;area=$this->area\">s".sprintf("%02d",$week)."</a>";
+                $s .="<a title=\"".my_htmlspecialcharacters(get_vocab("see_week_for_this_area"))."\" href=\"week_all.php?year=$this->year&amp;month=$this->month&amp;day=$temp&amp;area=$this->area\">s".sprintf("%02d",$week)."</a>";
             $temp=$temp+7;
             while ((!checkdate($this->month, $temp, $this->year)) and ($temp > 0))  $temp--;
 
@@ -236,14 +236,14 @@ get_planning_area_values($area);
         $flag_surlignage=0;
       echo "<td>";$cal = new Calendar(date("d",$key), date("m",$key), date("Y",$key), $flag_surlignage, $area, $room, $dmy, $mois_precedent, $mois_suivant);
       echo $cal->getHTML();
-//      if ($ind == $milieu) echo "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_several_months"))."\" href=\"year.php?area=$area\">".$vocab["viewyear"]."</a>";
+//      if ($ind == $milieu) echo "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_several_months"))."\" href=\"year.php?area=$area\">".$vocab["viewyear"]."</a>";
       echo "</td>";
       $ind++;
      }
     }
     // Affichage du lien "plusieurs mois"
     echo "<td>";
-    echo "<a title=\"".htmlspecialchars(get_vocab("see_all_the_rooms_for_several_months"))."\" href=\"year.php?area=$area\">".$vocab["viewyear"]."</a>";
+    echo "<a title=\"".my_htmlspecialcharacters(get_vocab("see_all_the_rooms_for_several_months"))."\" href=\"year.php?area=$area\">".$vocab["viewyear"]."</a>";
     echo "</td>";
 
 }?>

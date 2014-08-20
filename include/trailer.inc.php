@@ -45,7 +45,7 @@
 if ( ( !isset($_GET['pview'])  or ($_GET['pview'] != 1)) and (isset($affiche_pview))) {
     echo "<div class=\"format_imprimable\"><a href=\"". traite_grr_url($grr_script_name) ."?";
     if (isset($_SERVER['QUERY_STRING']) and ($_SERVER['QUERY_STRING'] != ''))
-        echo htmlspecialchars($_SERVER['QUERY_STRING']) . "&amp;";
+        echo my_htmlspecialcharacters($_SERVER['QUERY_STRING']) . "&amp;";
     echo "pview=1\" ";
     if (getSettingValue("pview_new_windows")==1) echo " target=\"_blank\"";
     echo ">" . get_vocab("ppreview") . "</a></div>";

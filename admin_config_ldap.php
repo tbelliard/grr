@@ -527,7 +527,7 @@ if ($etape == 3) {
         Dans le cas contraire, seuls les utilisateurs appartenant à au moins l'un des groupes listés seront autorisés à accéder à GRR.
         Ecrivez les groupes en les séparant par un point-vigule, par exemple : \"Profs;Administratifs\".
         Seuls les groupes de type \"posixGroup\" sont supportés (les groupes de type \"groupOfNames\" ne sont pas supportés).</span>");
-        echo "<br />\n<input type=\"text\" name=\"se3_liste_groupes_autorises\" value=\"".htmlentities( getSettingValue("se3_liste_groupes_autorises"))."\" size=\"50\" />\n";
+        echo "<br />\n<input type=\"text\" name=\"se3_liste_groupes_autorises\" value=\"".my_htmlspecialcharacters( getSettingValue("se3_liste_groupes_autorises"))."\" size=\"50\" />\n";
         echo "</div>\n";
         echo "<div style=\"text-align:center;\">\n<input type=\"submit\" name=\"Valider1\" value=\"Valider\" />\n</div>\n";
     } else {

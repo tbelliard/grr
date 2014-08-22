@@ -315,7 +315,7 @@ echo "</table>";
 echo "<div>".get_vocab("lcs_SSO_explain_2");
 echo "<br /><br />";
 echo get_vocab("lcs_SSO_explain_3");
-echo "<br /><input type=\"text\" name=\"lcs_liste_groupes_autorises\" value=\"".htmlentities( getSettingValue("lcs_liste_groupes_autorises"))."\" size=\"50\" /></div>\n";
+echo "<br /><input type=\"text\" name=\"lcs_liste_groupes_autorises\" value=\"".my_htmlspecialcharacters( getSettingValue("lcs_liste_groupes_autorises"))."\" size=\"50\" /></div>\n";
 
 echo "<hr />\n";
 // Configuration Lasso

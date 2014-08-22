@@ -1056,7 +1056,7 @@ if ((!empty($id_area)) or (isset($add_area)))
         $nom_periode = grr_sql_query1("select nom_periode FROM ".TABLE_PREFIX."_area_periodes where id_area='".$id_area."' and num_periode= '".$i."'");
         if ($nom_periode == -1) $nom_periode = "";
         echo "<table style=\"display:none\" id=\"c".($i+1)."\"><tr><td>".get_vocab("intitule_creneau").($i+1).get_vocab("deux_points")."</td>";
-        echo "<td style=\"width:30%;\"><input type=\"text\" name=\"periode_".$i."\" value=\"".htmlentities($nom_periode)."\" size=\"20\" /></td></tr></table>\n";
+        echo "<td style=\"width:30%;\"><input type=\"text\" name=\"periode_".$i."\" value=\"".my_htmlspecialcharacters($nom_periode)."\" size=\"20\" /></td></tr></table>\n";
         $i++;
     }
         // L'utilisateur ne peut réserver qu'une durée limitée (-1 désactivée), exprimée en jours

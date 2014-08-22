@@ -153,6 +153,6 @@ header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 if ($nb_type > 1) {
     echo $display_type;
 } else {
-	echo "<table width=100%><tr><td class=\"E\"><b>".get_vocab("type").get_vocab("deux_points").htmlentities(removeMailUnicode($type_nom_unique))."</b>"."<input name=\"type\" type=\"hidden\" value=\"".$type_id_unique."\" /></td></tr></table>\n";
+	echo "<table width=100%><tr><td class=\"E\"><b>".get_vocab("type").get_vocab("deux_points").my_htmlspecialcharacters(removeMailUnicode($type_nom_unique))."</b>"."<input name=\"type\" type=\"hidden\" value=\"".$type_id_unique."\" /></td></tr></table>\n";
 }
 ?>

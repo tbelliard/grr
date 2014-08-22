@@ -324,7 +324,7 @@ foreach( $userdomain as $key=>$value )
     $html .= "<input type=\"submit\" value=\"".get_vocab('change')."\" />";
     if ($row[2] == "list") {
         $html .= "<br />".get_vocab("Liste des champs").get_vocab("deux_points")."<br />";
-        $html .= "<input type=\"text\" name=\"fieldlist\" value=\"".htmlentities($row[4])."\" size=\"50\" />";
+        $html .= "<input type=\"text\" name=\"fieldlist\" value=\"".my_htmlspecialcharacters($row[4])."\" size=\"50\" />";
     }
 
     $html .= "</div></form></td>\n";

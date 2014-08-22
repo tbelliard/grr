@@ -134,7 +134,7 @@ if ($res)
 		  if($aff_default and isset($_COOKIE['type_default'])) $cookie = $_COOKIE['type_default']; else $cookie="";
           if ((!$cookie and ($id_type_par_defaut == $row[2])) or ($cookie and $cookie==$row[0])) $display_type .=  " selected=\"selected\"";
       }
-      $display_type .=  " >".htmlentities(removeMailUnicode($row[0]))."</option>\n";
+      $display_type .=  " >".my_htmlspecialcharacters(removeMailUnicode($row[0]))."</option>\n";
     }
     }
 

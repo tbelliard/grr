@@ -204,7 +204,9 @@ $insertComplet = false;
 $grrSettings = array();
 
 # Utilisé par my_htmlspecialcharacters pour compatibilité php 5.4
-define('CHARSET', 'ISO-8859-1');
+if ($unicode_encoding == 0) {
+  define('CHARSET', 'ISO-8859-1');
+}
 define('REPLACE_FLAGS', ENT_COMPAT | ENT_XHTML);
 
 # Make sure notice errors are not reported
